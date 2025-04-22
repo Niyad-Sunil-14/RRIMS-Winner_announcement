@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRIMS Winner Announcement</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f7fa, #f3e5f5);
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        .congrats-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            text-align: center;
+            color: #ffffff;
+            background: rgba(33, 37, 41, 0.95);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            display: none;
+            border: 3px solid #ffc107;
+            max-width: 90%;
+            animation: pulseBorder 2s ease-in-out infinite;
+        }
+        @keyframes pulseBorder {
+            0% { border-color: #ffc107; box-shadow: 0 0 10px #ffc107; }
+            50% { border-color: #ffca28; box-shadow: 0 0 20px #ffca28; }
+            100% { border-color: #ffc107; box-shadow: 0 0 10px #ffc107; }
+        }
+        .congrats-animation h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .congrats-animation p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .party-popper {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('https://img.icons8.com/emoji/48/000000/party-popper.png') no-repeat center;
+            background-size: contain;
+            animation: popper 1.5s ease-out infinite;
+        }
+        .popper-left {
+            top: -30px;
+            left: -30px;
+        }
+        .popper-right {
+            top: -30px;
+            right: -30px;
+        }
+        .popper-bottom-left {
+            bottom: -30px;
+            left: -30px;
+        }
+        .popper-bottom-right {
+            bottom: -30px;
+            right: -30px;
+        }
+        @keyframes popper {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        .winner-card {
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        .winner-card:hover {
+            transform: translateY(-10px);
+        }
+        .prize-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+            border: 3px solid #ffc107;
+            box-shadow: 0 0 15px #ffc107;
+            animation: pulsePrize 2s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+        .prize-img:hover {
+            transform: scale(1.1);
+        }
+        @keyframes pulsePrize {
+            0% { box-shadow: 0 0 15px #ffc107; }
+            50% { box-shadow: 0 0 25px #ffca28; }
+            100% { box-shadow: 0 0 15px #ffc107; }
+        }
+        .card-body {
+            padding: 25px;
+            text-align: center;
+        }
+        .certificate-link {
+            color: #007bff;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .certificate-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        .header {
+            background: linear-gradient(90deg, #007bff, #00c4b4);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 5px solid #ffc107;
+        }
+        .header img {
+            max-width: 150px;
+            margin-bottom: 20px;
+            height: 100px;
+        }
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .footer {
+            background: linear-gradient(90deg, #007bff, #00c4b4);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 5px solid #ffc107;
+        }
+        .footer h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .footer p {
+            font-size: 1rem;
+            font-weight: 300;
+            margin: 0;
+        }
+        .section-title {
+            color: #007bff;
+            font-weight: 600;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: #ffc107;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @media (max-width: 576px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header img {
+                max-width: 100px;
+            }
+            .congrats-animation {
+                padding: 20px 30px;
+            }
+            .congrats-animation h1 {
+                font-size: 1.8rem;
+            }
+            .prize-img {
+                height: 200px;
+            }
+            .party-popper {
+                width: 30px;
+                height: 30px;
+            }
+            .footer h3 {
+                font-size: 1.5rem;
+            }
+        }
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0.15em solid #ffc107;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #ffc107; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Congratulation Animation -->
+    <div class="animate__animated" id="congrats">
+        <!-- <div class="party-popper popper-left"></div>
+        <div class="party-popper popper-right"></div>
+        <div class="party-popper popper-bottom-left"></div>
+        <div class="party-popper popper-bottom-right"></div>
+        <h1 class="typewriter">Congratulations to RRIMS Winners!</h1>
+        <p>Your achievements shine bright!</p> -->
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="static/Certificate/RRIMS_logo.png" alt="RRIMS Logo">
+        <h1>RRIMS DIGITAL COLLAGE MAKING - WINNER</h1>
+        <p>Celebrating Excellence at RR Institute of Management Studies</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Winner 1 -->
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title text-center mb-4">1st Prize</h2>
+            </div>
+            <div class="col-md-6 mx-auto">
+                <div class="card winner-card">
+                    <img src="static/Prize/PRIZE-1.jpg" alt="1st Prize" class="prize-img" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="static/Prize/PRIZE-1.jpg" data-title="1st Prize" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h3 class="card-title">Harsha Vardhana T G (U03JF24S0149)</h3>
+                        <p class="card-text">Certificate: <a href="static/Certificate/certificate1.pdf" class="certificate-link" target="_blank">View Certificate</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Winner 2 -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h2 class="section-title text-center mb-4">2nd Prize</h2>
+            </div>
+            <div class="col-md-6 mx-auto">
+                <div class="card winner-card">
+                    <img src="static/Prize/PRIZE-2.jpg" alt="2nd Prize" class="prize-img" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="static/Prize/PRIZE-2.jpg" data-title="2nd Prize" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h3 class="card-title">Sangeerth R (U03JF24S0093)</h3>
+                        <h3 class="card-title">&</h3>
+                        <h3 class="card-title">Dhindev T V (U03JF24S0099)</h3>
+                        <p class="card-text">Certificate: <a href="static/Certificate/certificate2.pdf" class="certificate-link" target="_blank">View Certificate</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <h3>Congratulations to All Winners!</h3>
+        <p>Your dedication and hard work have truly paid off. Keep shining!</p>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Prize Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Prize Image" class="img-fluid" style="max-height: 60vh;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Show dynamic congratulation animation on page load
+        window.onload = function() {
+            const congrats = document.getElementById('congrats');
+            const isMobile = window.innerWidth <= 576;
+            const animationDuration = isMobile ? 3000 : 5000;
+
+            // Show animation
+            congrats.style.display = 'block';
+            congrats.classList.add('animate__zoomIn');
+
+            // Trigger confetti
+            confetti({
+                particleCount: isMobile ? 50 : 100,
+                spread: isMobile ? 50 : 70,
+                origin: { y: 0.6 },
+                colors: ['#ffc107', '#007bff', '#ffca28', '#00c4b4']
+            });
+
+            // Hide after animation duration
+            setTimeout(() => {
+                congrats.classList.remove('animate__zoomIn');
+                congrats.classList.add('animate__fadeOut');
+                setTimeout(() => {
+                    congrats.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    confetti.reset();
+                }, 1000);
+            }, animationDuration);
+        };
+
+        // Set image source and title in modal when opened
+        const imageModal = document.getElementById('imageModal');
+        imageModal.addEventListener('show.bs.modal', function (event) {
+            const img = event.relatedTarget; // The image that triggered the modal
+            const imgSrc = img.getAttribute('data-src'); // Get the image source
+            const imgTitle = img.getAttribute('data-title'); // Get the prize title
+            const modalImg = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('imageModalLabel');
+            modalImg.src = imgSrc; // Set the modal image source
+            modalTitle.textContent = imgTitle; // Set the modal title
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!-- 
+
+1ST PRIZE - HARSHA VARDHANA T G U03JF24S0149
+2ND PRIZE - SANGEERTH R (U03JF24S0093)
+            DHINDEV T V (U03JF24S0099)
+            
+            -->
